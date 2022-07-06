@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::prefix('convert')
+    ->namespace('Convert')
+    ->group(function () {
+        Route::resource('convert', 'ConvertController');
+        Route::resource('demo', 'DemoController');
+        Route::get('dd', function () { return view("welcome"); });
+    });
