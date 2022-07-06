@@ -1,21 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Convert;
 
-use App\Http\Requests\Storedoc_listRequest;
-use App\Http\Requests\Updatedoc_listRequest;
-use App\Models\doc_list;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class DocListController extends Controller
+class DemoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        try{
+            $params = $request->all();
+            return $this->success($params);
+        } catch (\Exception $exception) {
+            return $this->failed($exception->getMessage());
+        }
     }
 
     /**
@@ -31,10 +36,10 @@ class DocListController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Storedoc_listRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Storedoc_listRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +47,10 @@ class DocListController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\doc_list  $doc_list
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(doc_list $doc_list)
+    public function show($id)
     {
         //
     }
@@ -53,10 +58,10 @@ class DocListController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\doc_list  $doc_list
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(doc_list $doc_list)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +69,11 @@ class DocListController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Updatedoc_listRequest  $request
-     * @param  \App\Models\doc_list  $doc_list
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Updatedoc_listRequest $request, doc_list $doc_list)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +81,10 @@ class DocListController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\doc_list  $doc_list
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(doc_list $doc_list)
+    public function destroy($id)
     {
         //
     }
