@@ -3,7 +3,7 @@
 namespace App\Domain\Convert\Repositories\Eloquent;
 
 use App\Domain\Convert\Repositories\Contracts\DocListsRepository;
-use App\Domain\Models\Convert\DocLists;
+use App\Domain\Convert\Models\DocLists;
 use App\Repositories\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Exceptions\RepositoryException;

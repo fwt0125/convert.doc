@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocListsTable extends Migration
+class CreateDocLists extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,11 @@ class CreateDocListsTable extends Migration
     {
         Schema::create('doc_lists', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name');
+            $table->string('source_file');
+            $table->string('convert_file')->nullable();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
         });
     }
 
@@ -26,6 +30,6 @@ class CreateDocListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doc_lists');
+        Schema::dropIfExists('doc_list');
     }
 }

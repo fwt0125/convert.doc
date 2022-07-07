@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Convert;
 
+use App\Domain\Admin\Jobs\UnitImport;
+use App\Domain\Convert\Jobs\Convert;
+use App\Domain\Convert\Jobs\ConvertDoc;
 use App\Domain\Convert\Services\DocListsService;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 
 class ConvertController extends Controller
 {
+    use DispatchesJobs;
     /**
      * @var DocListsService
      */
@@ -36,16 +41,14 @@ class ConvertController extends Controller
             try {
                 $fileName = $request->file('doc')->getClientOriginalName();
                 $destinationPath = storage_path() . "/upload/convert";
-                $result = $request->file('doc')->move($destinationPath, $fileName);
+                $fileResult = $request->file('doc')->move($destinationPath, $fileName);
 
                 $data = [
                     'name' => $fileName,
-                    'source_file' => $result->getRealPath(),
+                    'source_file' => $fileResult->getRealPath(),
                 ];
-
-                $this->service->store($data);
-
-
+                $dbResult = $this->service->store($data);
+                $this->dispatch(new ConvertDoc($dbResult->id));
 
             } catch (\Exception $exception) {
                 return $this->failed($exception->getMessage());

@@ -14,6 +14,10 @@ class ConvertServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind(
+            'App\Domain\Convert\Repositories\Contracts\DocListsRepository',
+            'App\Domain\Convert\Repositories\Eloquent\DocListsRepositoryEloquent'
+        );
     }
 
     /**
@@ -24,19 +28,5 @@ class ConvertServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-    }
-
-
-    /**
-     * 注册该领域的Repository
-     *
-     * @return void
-     */
-    protected function repositoryRegister()
-    {
-        $this->app->bind(
-            'App\Domain\Convert\Repositories\Contracts\DocListsRepository',
-            'App\Domain\Convert\Repositories\Eloquent\DocListsRepositoryEloquent'
-        );
     }
 }
